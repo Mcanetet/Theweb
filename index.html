@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theo.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -290,9 +291,36 @@
     </div>
   </footer>
 
+  <!-- Theo — siempre en el HTML para que se vea aunque falle un script -->
+  <div class="theo-root" id="theoRoot">
+    <button type="button" class="theo-launcher" id="theoLauncher" aria-expanded="false" aria-controls="theoPanel">
+      <span class="theo-avatar" aria-hidden="true">T<span class="theo-online" title="En línea"></span></span>
+      <span class="theo-launcher-copy">
+        <span class="label" data-i18n="theoLaunch">Habla con Theo</span>
+        <span class="theo-status" data-i18n="theoOnline">En línea</span>
+      </span>
+    </button>
+    <section class="theo-panel" id="theoPanel" role="dialog" aria-label="Theo">
+      <header class="theo-header">
+        <div class="theo-header-id">
+          <span class="theo-avatar" aria-hidden="true">T<span class="theo-online"></span></span>
+          <div>
+            <h2>Theo</h2>
+            <p><span data-i18n="theoRole">Agente TheWeb.</span> · <span class="theo-status" data-i18n="theoOnline">En línea</span></p>
+          </div>
+        </div>
+        <button type="button" class="theo-close" id="theoClose" data-i18n-aria="theoClose" aria-label="Cerrar">&times;</button>
+      </header>
+      <div class="theo-messages" id="theoMessages"></div>
+      <form class="theo-form" id="theoForm">
+        <input type="text" id="theoInput" maxlength="2000" autocomplete="off" data-i18n-placeholder="theoPlaceholder" placeholder="Escribe tu consulta…">
+        <button type="submit" id="theoSend" data-i18n="theoSend">Enviar</button>
+      </form>
+    </section>
+  </div>
+
   <script src="i18n.js"></script>
   <script src="script.js"></script>
-  <link rel="stylesheet" href="theo.css">
   <script src="theo.js"></script>
 </body>
 </html>

@@ -41,7 +41,6 @@ body {
   background-color: var(--black);
   color: var(--white);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,6 +1,5 @@
 (function () {
   const SESSION_KEY = 'theweb_theo_session';
-  const CONTACT_EMAIL = 'contacto@theweb.cl';
 
   function t(key) {
     return window.TheWebI18n ? window.TheWebI18n.t(key) : key;
@@ -27,39 +26,16 @@
     return id;
   }
 
-  function mount() {
-    const wrap = document.createElement('div');
-    wrap.className = 'theo-root';
-    wrap.innerHTML = `
-      <button type="button" class="theo-launcher" id="theoLauncher" aria-expanded="false" aria-controls="theoPanel">
-        <span class="theo-avatar">T</span>
-        <span class="label" data-i18n="theoLaunch">${t('theoLaunch')}</span>
-      </button>
-      <section class="theo-panel" id="theoPanel" role="dialog" aria-label="Theo">
-        <header class="theo-header">
-          <div class="theo-header-id">
-            <span class="theo-avatar">T</span>
-            <div>
-              <h2>Theo</h2>
-              <p><span data-i18n="theoRole">${t('theoRole')}</span> · ${CONTACT_EMAIL}</p>
-            </div>
-          </div>
-          <button type="button" class="theo-close" id="theoClose" data-i18n-aria="theoClose" aria-label="${t('theoClose')}">&times;</button>
-        </header>
-        <div class="theo-messages" id="theoMessages"></div>
-        <form class="theo-form" id="theoForm">
-          <input type="text" id="theoInput" maxlength="2000" autocomplete="off" data-i18n-placeholder="theoPlaceholder" placeholder="${t('theoPlaceholder')}">
-          <button type="submit" id="theoSend" data-i18n="theoSend">${t('theoSend')}</button>
-        </form>
-      </section>`;
-    document.body.appendChild(wrap);
-
+  function bind() {
     const panel = document.getElementById('theoPanel');
     const launcher = document.getElementById('theoLauncher');
     const messages = document.getElementById('theoMessages');
     const form = document.getElementById('theoForm');
     const input = document.getElementById('theoInput');
     const sendBtn = document.getElementById('theoSend');
+    const root = document.getElementById('theoRoot');
+
+    if (!panel || !launcher || !form || !messages || !input || !sendBtn) return;
 
     function addBubble(text, who) {
       const el = document.createElement('div');
@@ -69,17 +45,12 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
-    addBubble(t('theoHello'), 'bot');
+    if (!messages.dataset.ready) {
+      addBubble(t('theoHello'), 'bot');
+      messages.dataset.ready = '1';
+    }
 
-    document.addEventListener('theweb:lang', () => {
-      wrap.querySelector('[data-i18n="theoLaunch"]').textContent = t('theoLaunch');
-      wrap.querySelector('[data-i18n="theoRole"]').textContent = t('theoRole');
-      wrap.querySelector('[data-i18n="theoSend"]').textContent = t('theoSend');
-      input.placeholder = t('theoPlaceholder');
-      document.getElementById('theoClose').setAttribute('aria-label', t('theoClose'));
-    });
-
-    function toggle(open) {
+    launcher.addEventListener('click', () => toggle());
       const isOpen = open ?? !panel.classList.contains('open');
       panel.classList.toggle('open', isOpen);
       launcher.setAttribute('aria-expanded', String(isOpen));
@@ -87,7 +58,8 @@
     }
 
     launcher.addEventListener('click', () => toggle());
-    document.getElementById('theoClose').addEventListener('click', () => toggle(false));
+    const closeBtn = document.getElementById('theoClose');
+    if (closeBtn) closeBtn.addEventListener('click', () => toggle(false));
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -118,11 +90,13 @@
         input.focus();
       }
     });
+
+    if (root) root.hidden = false;
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mount);
+    document.addEventListener('DOMContentLoaded', bind);
   } else {
-    mount();
+    bind();
   }
 })();
