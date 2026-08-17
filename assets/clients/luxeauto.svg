@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <circle cx="30" cy="40" r="16" fill="none" stroke="#737373" stroke-width="2"/>
+  <line x1="22" y1="40" x2="38" y2="40" stroke="#737373" stroke-width="1.5"/>
+  <line x1="30" y1="32" x2="30" y2="48" stroke="#737373" stroke-width="1.5"/>
+  <text x="54" y="48" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#a3a3a3">LuxeAuto</text>
+</svg>

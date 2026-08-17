@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Estudio TheWeb.</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-logo">Estudio TheWeb<span>.</span></div>
+      <p class="login-sub">Acceso interno — clientes, proyectos y seguimiento</p>
+      <form id="loginForm">
+        <div class="form-field">
+          <label for="loginGate">Clave de estudio</label>
+          <input type="password" id="loginGate" autocomplete="off" placeholder="Clave de acceso">
+        </div>
+        <div class="form-field">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required autocomplete="username">
+        </div>
+        <div class="form-field">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <p class="login-error" id="loginError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="app hidden" id="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">Estudio<span>.</span></div>
+      <nav class="sidebar-nav" id="sidebarNav">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="leads">Leads <span class="nav-badge hidden" id="badgeLeads">0</span></button>
+        <button class="nav-item" data-view="projects">Proyectos</button>
+        <button class="nav-item" data-view="contacts">Contactos</button>
+        <button class="nav-item" data-view="inbox">Mensajes <span class="nav-badge hidden" id="badgeMessages">0</span></button>
+      </nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-name" id="userName">—</div>
+        <div class="sidebar-user-role" id="userRole">—</div>
+        <button class="btn btn-ghost btn-sm sidebar-logout" id="logoutBtn">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <main class="main" id="mainContent"></main>
+  </div>
+
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal" id="modal" role="dialog"></div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheWeb. — Inteligencia Digital & Marketing Tecnológico</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-content">
+      <a href="#" class="nav-logo">
+        <img src="assets/logo.png" alt="TheWeb." class="logo-img">
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services" data-i18n="navServices">Servicios</a></li>
+        <li><a href="#clients" data-i18n="navClients">Clientes</a></li>
+        <li><a href="#why" data-i18n="navWhy">¿Por qué TheWeb?</a></li>
+        <li><a href="#solutions" data-i18n="navSolutions">Soluciones</a></li>
+        <li class="nav-cta-item"><a href="#cta" class="nav-cta" data-i18n="navCta">Conversemos</a></li>
+      </ul>
+      <div class="lang-switch" role="group" data-i18n-aria="langLabel" aria-label="Idioma">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="menu-toggle" id="menuToggle" data-i18n-aria="menu" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container hero-content">
+      <p class="hero-tag" data-i18n="heroTag">/ Inteligencia Digital & Marketing Tecnológico /</p>
+      <h1 class="hero-title" data-i18n-html="heroTitle">
+        Desarrollamos plataformas digitales
+        <span class="highlight">inteligentes</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        Creamos tu sitio web y lo equipamos con agentes de IA especializados en vender y atender a tus clientes en piloto automático.
+      </p>
+      <a href="#cta" class="btn btn-primary btn-lg" data-i18n="heroBtn">Contáctanos</a>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-dark" id="services">
+    <div class="container">
+      <p class="section-tag" data-i18n="servicesTag">TheServices</p>
+      <div class="services-grid">
+
+        <div class="service-card" data-animate>
+          <div class="service-number">01</div>
+          <h3 class="service-title" data-i18n-html="service1Title">TheWeb / <span class="highlight">Core</span></h3>
+          <p class="service-desc" data-i18n="service1Desc">
+            Diseño y desarrollo de sitios web de alta conversión. E-commerce robustos y landing pages optimizadas para transformar visitas en clientes reales. Tu base digital, sólida y profesional.
+          </p>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-card" data-animate>
+          <div class="service-number">02</div>
+          <h3 class="service-title" data-i18n-html="service2Title">TheWeb / <span class="highlight">Agents</span></h3>
+          <p class="service-tag">
+            <span class="service-tag-bracket">&lt;</span>
+            <svg class="service-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-10"/><path d="M14 7h7v7"/></svg>
+            <span data-i18n="service2Tag">ventas</span>
+            <span class="service-tag-bracket">&gt;</span>
+          </p>
+          <p class="service-desc" data-i18n="service2Desc">
+            Asistentes de IA entrenados con tu catálogo. Capaces de calificar leads, agendar reuniones y cerrar ventas en tiempo real, directo en tu web o a través de WhatsApp. Un clon digital de tu mejor vendedor.
+          </p>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-card" data-animate>
+          <div class="service-number">03</div>
+          <h3 class="service-title" data-i18n-html="service3Title">TheWeb / <span class="highlight">Support</span></h3>
+          <p class="service-tag">
+            <span class="service-tag-bracket">&lt;</span>
+            <svg class="service-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 014 4v2H8V6a4 4 0 014-4z"/><path d="M6 10h12v4a6 6 0 01-12 0v-4z"/><path d="M9 20h6"/></svg>
+            <span data-i18n="service3Tag">autoatención</span>
+            <span class="service-tag-bracket">&gt;</span>
+          </p>
+          <p class="service-desc" data-i18n="service3Desc">
+            Soporte y postventa automatizada. Agentes de IA integrados a la base de conocimiento de tu empresa para resolver más del 80% de preguntas frecuentes, tracking de envíos o soporte técnico sin intervención humana.
+          </p>
+          <div class="service-line"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section class="section" id="clients">
+    <div class="container">
+      <p class="section-tag" data-i18n="clientsTag">TheClients</p>
+      <h2 class="section-title" data-i18n="clientsTitle">Confían en nosotros</h2>
+    </div>
+    <div class="clients-marquee">
+      <div class="clients-track">
+        <div class="client-logo"><img src="assets/clients/novatech.svg" alt="NovaTech"></div>
+        <div class="client-logo"><img src="assets/clients/pulsefit.svg" alt="PulseFit"></div>
+        <div class="client-logo"><img src="assets/clients/urbanhome.svg" alt="UrbanHome"></div>
+        <div class="client-logo"><img src="assets/clients/greenleaf.svg" alt="GreenLeaf"></div>
+        <div class="client-logo"><img src="assets/clients/codestack.svg" alt="CodeStack"></div>
+        <div class="client-logo"><img src="assets/clients/luxeauto.svg" alt="LuxeAuto"></div>
+        <div class="client-logo"><img src="assets/clients/novatech.svg" alt="NovaTech"></div>
+        <div class="client-logo"><img src="assets/clients/pulsefit.svg" alt="PulseFit"></div>
+        <div class="client-logo"><img src="assets/clients/urbanhome.svg" alt="UrbanHome"></div>
+        <div class="client-logo"><img src="assets/clients/greenleaf.svg" alt="GreenLeaf"></div>
+        <div class="client-logo"><img src="assets/clients/codestack.svg" alt="CodeStack"></div>
+        <div class="client-logo"><img src="assets/clients/luxeauto.svg" alt="LuxeAuto"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY THEWEB -->
+  <section class="section section-dark" id="why">
+    <div class="container why-container">
+      <p class="section-tag" data-i18n="whyTag">TheAnswer</p>
+      <h2 class="section-title" data-i18n-html="whyTitle">¿Por qué <span class="highlight">TheWeb</span>?</h2>
+      <p class="why-text" data-i18n="whyText">
+        Creamos la solución para tu negocio con plataformas que interactúan, califican y venden mientras duermes.
+      </p>
+      <div class="why-stats" data-animate>
+        <div class="stat">
+          <span class="stat-number" data-count="80">0</span><span class="stat-symbol">%+</span>
+          <p class="stat-label" data-i18n="stat1">Consultas automatizadas</p>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-count="24">0</span><span class="stat-symbol">/7</span>
+          <p class="stat-label" data-i18n="stat2">Disponibilidad total</p>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-count="3">0</span><span class="stat-symbol">x</span>
+          <p class="stat-label" data-i18n="stat3">Más conversiones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="section" id="solutions">
+    <div class="container">
+      <p class="section-tag" data-i18n="solutionsTag">TheSolutions</p>
+      <h2 class="section-title" data-i18n="solutionsTitle">Creamos soluciones para los rubros que mueven el mercado</h2>
+
+      <div class="solutions-grid">
+
+        <div class="solution-card" data-animate>
+          <div class="solution-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 35V18L20 5l15 13v17H5z"/><rect x="15" y="22" width="10" height="13"/><circle cx="20" cy="14" r="2" fill="#ffde59" stroke="#ffde59"/></svg>
+          </div>
+          <h3 class="solution-title" data-i18n="s1Title">Inmobiliarias y Corredoras</h3>
+          <div class="solution-content">
+            <p class="solution-problem"><strong data-i18n="problem">El problema:</strong> <span data-i18n="s1P">Leads que se pierden por falta de tiempo para responder portales.</span></p>
+            <p class="solution-answer"><strong data-i18n="solution">La solución:</strong> <span data-i18n="s1A">Tu catálogo web interactivo + una IA que califica el presupuesto del cliente y agenda la visita al piloto automáticamente.</span></p>
+          </div>
+        </div>
+
+        <div class="solution-card" data-animate>
+          <div class="solution-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h8l4-10 4 20 4-14 4 8h8"/><circle cx="32" cy="24" r="2" fill="#ffde59" stroke="#ffde59"/></svg>
+          </div>
+          <h3 class="solution-title" data-i18n="s2Title">Salud y Clínicas Estéticas</h3>
+          <div class="solution-content">
+            <p class="solution-problem"><strong data-i18n="problem">El problema:</strong> <span data-i18n="s2P">Secretarías colapsadas respondiendo precios, direcciones y disponibilidad.</span></p>
+            <p class="solution-answer"><strong data-i18n="solution">La solución:</strong> <span data-i18n="s2A">Una IA que explica los tratamientos, resuelve dudas frecuentes y pre-agenda la cita directo en tu sistema.</span></p>
+          </div>
+        </div>
+
+        <div class="solution-card" data-animate>
+          <div class="solution-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h12a3 3 0 013 3v22a2 2 0 00-2-2H5V8z"/><path d="M35 8H23a3 3 0 00-3 3v22a2 2 0 012-2h13V8z"/><line x1="20" y1="11" x2="20" y2="33"/><circle cx="30" cy="12" r="2" fill="#ffde59" stroke="#ffde59"/></svg>
+          </div>
+          <h3 class="solution-title" data-i18n="s3Title">Educación y Academias Online</h3>
+          <div class="solution-content">
+            <p class="solution-problem"><strong data-i18n="problem">El problema:</strong> <span data-i18n="s3P">Prospectos pidiendo mallas curriculares y precios fuera de horario laboral.</span></p>
+            <p class="solution-answer"><strong data-i18n="solution">La solución:</strong> <span data-i18n="s3A">Landing pages de alta conversión con un agente de IA que vende los cursos y resuelve dudas de financiamiento 24/7.</span></p>
+          </div>
+        </div>
+
+        <div class="solution-card" data-animate>
+          <div class="solution-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="16" width="28" height="18" rx="2"/><path d="M14 16V10a6 6 0 0112 0v6"/><line x1="6" y1="24" x2="34" y2="24"/><circle cx="20" cy="24" r="2" fill="#ffde59" stroke="#ffde59"/></svg>
+          </div>
+          <h3 class="solution-title" data-i18n="s4Title">Servicios B2B y Consultoras</h3>
+          <div class="solution-content">
+            <p class="solution-problem"><strong data-i18n="problem">El problema:</strong> <span data-i18n="s4P">Pérdida de tiempo en reuniones con leads que no tienen el perfil o el presupuesto.</span></p>
+            <p class="solution-answer"><strong data-i18n="solution">La solución:</strong> <span data-i18n="s4A">Un filtro inteligente en tu web que entrevista al prospecto y solo agenda en tu calendario a los clientes ideales.</span></p>
+          </div>
+        </div>
+
+        <div class="solution-card" data-animate>
+          <div class="solution-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24l3-10h26l3 10"/><rect x="3" y="24" width="34" height="8" rx="2"/><circle cx="11" cy="32" r="3"/><circle cx="29" cy="32" r="3"/><circle cx="11" cy="18" r="1.5" fill="#ffde59" stroke="#ffde59"/><line x1="14" y1="14" x2="26" y2="14"/></svg>
+          </div>
+          <h3 class="solution-title" data-i18n="s5Title">Automotoras y Concesionarios</h3>
+          <div class="solution-content">
+            <p class="solution-problem"><strong data-i18n="problem">El problema:</strong> <span data-i18n="s5P">Consultas constantes sobre stock, fichas técnicas y opciones de financiamiento.</span></p>
+            <p class="solution-answer"><strong data-i18n="solution">La solución:</strong> <span data-i18n="s5A">Un showroom digital donde la IA simula pre-aprobaciones de crédito y agenda los Test Drives.</span></p>
+          </div>
+        </div>
+
+        <div class="solution-card" data-animate>
+          <div class="solution-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="28" height="28" rx="2"/><path d="M6 14h28"/><path d="M16 6v8"/><path d="M24 6v8"/><polyline points="14 22 18 26 26 20" stroke="#ffde59" stroke-width="2"/></svg>
+          </div>
+          <h3 class="solution-title" data-i18n="s6Title">E-commerce y Proveedores Industriales</h3>
+          <div class="solution-content">
+            <p class="solution-problem"><strong data-i18n="problem">El problema:</strong> <span data-i18n="s6P">Clientes saturando los canales para saber el estado de su despacho o pedir cotizaciones mayoristas.</span></p>
+            <p class="solution-answer"><strong data-i18n="solution">La solución:</strong> <span data-i18n="s6A">Automatización de postventa conectada a tu sistema logístico para entregar trackings y cotizaciones en segundos.</span></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-cta" id="cta">
+    <div class="container cta-container">
+      <h2 class="cta-title" data-i18n="ctaTitle">¿Listo para automatizar tu negocio?</h2>
+      <p class="cta-subtitle" data-i18n="ctaSubtitle">Conversemos sobre cómo podemos transformar tu presencia digital.</p>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="contact-form-grid">
+          <div class="form-group">
+            <label for="contactName" data-i18n="formName">Nombre *</label>
+            <input type="text" id="contactName" name="name" required autocomplete="name" data-i18n-placeholder="phName" placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="contactEmail" data-i18n="formEmail">Email *</label>
+            <input type="email" id="contactEmail" name="email" autocomplete="email" data-i18n-placeholder="phEmail" placeholder="david.c@example.com">
+          </div>
+          <div class="form-group">
+            <label for="contactPhone" data-i18n="formPhone">Teléfono / WhatsApp</label>
+            <input type="tel" id="contactPhone" name="phone" autocomplete="tel" data-i18n-placeholder="phPhone" placeholder="+56 9 1234 5678">
+          </div>
+          <div class="form-group">
+            <label for="contactCompany" data-i18n="formCompany">Empresa</label>
+            <input type="text" id="contactCompany" name="company" autocomplete="organization" data-i18n-placeholder="phCompany" placeholder="Nombre de la empresa, no el cargo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage" data-i18n="formMessage">Mensaje *</label>
+          <textarea id="contactMessage" name="message" rows="4" required data-i18n-placeholder="phMessage" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+        </div>
+        <div class="contact-form-actions">
+          <button type="submit" class="btn btn-primary btn-lg" id="contactSubmit" data-i18n="formSubmit">Enviar mensaje</button>
+          <a href="mailto:contacto@theweb.cl" class="btn btn-primary btn-lg btn-outline" data-i18n="formMail">Escribir a contacto@</a>
+        </div>
+        <p class="form-feedback" id="contactFeedback" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="TheWeb." class="footer-logo">
+        <p class="footer-tagline" data-i18n="footerTag">/ Inteligencia Digital & Marketing Tecnológico /</p>
+      </div>
+      <div class="footer-links">
+        <a href="#services" data-i18n="footerServices">Servicios</a>
+        <a href="#solutions" data-i18n="footerSolutions">Soluciones</a>
+        <a href="#cta" data-i18n="footerContact">Contacto</a>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footerCopy">&copy; 2026 TheWeb. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="theo.css">
+  <script src="theo.js"></script>
+</body>
+</html>
