@@ -873,16 +873,6 @@ img {
   margin-top: 8px;
 }
 
-.btn-outline {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.btn-outline:hover {
-  border-color: rgba(255, 222, 89, 0.55);
-  background: rgba(255, 222, 89, 0.08);
-}
-
 .form-feedback {
   margin-top: 16px;
   font-size: 0.9rem;
@@ -898,10 +888,16 @@ img {
 }
 
 .hp {
-  position: absolute;
-  left: -9999px;
-  height: 0;
-  overflow: hidden;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  pointer-events: none;
 }
 
 .contact-form.is-loading .btn {
