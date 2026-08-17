@@ -560,13 +560,15 @@ img {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  padding: 16px 24px;
+  padding: 16px 36px;
 }
 
 .client-logo img {
-  width: 160px;
-  height: auto;
-  opacity: 0.4;
+  width: auto;
+  height: 48px;
+  max-width: 180px;
+  object-fit: contain;
+  opacity: 0.55;
   transition: var(--transition);
 }
 
