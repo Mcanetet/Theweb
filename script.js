@@ -116,10 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
     return '';
   }
 
+  async function postJson(url, payload) {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    return { res, data };
+  }
+
+  async function sendViaPhp(payload) {
+    const { res, data } = await postJson(`${apiBase()}/send-lead.php`, payload);
+    if (!res.ok || !data.ok) throw new Error(data.error || 'php_mail_failed');
+    return data;
+  }
+
   async function sendViaFormSubmit(payload) {
     const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify({
         name: payload.name,
         email: payload.email || CONTACT_EMAIL,
@@ -131,8 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
         _captcha: 'false',
       }),
     });
-    if (!res.ok) throw new Error('email_fallback_failed');
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    const ok = data.success === true || data.success === 'true';
+    if (!res.ok || !ok) {
+      throw new Error(data.message || 'email_fallback_failed');
+    }
+    return data;
   }
 
   if (contactForm) {
@@ -152,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         phone: phone || undefined,
         company: company || undefined,
         message,
+        website: contactForm.website ? contactForm.website.value : '',
         pageUrl: window.location.href,
         lang: window.TheWebI18n ? window.TheWebI18n.getLang() : 'es',
       };
@@ -171,30 +195,28 @@ document.addEventListener('DOMContentLoaded', () => {
       contactForm.classList.add('is-loading');
 
       try {
-        let delivered = false;
+        let mailed = false;
+
         try {
-          const res = await fetch(`${apiBase()}/api/leads`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          });
-          const data = await res.json().catch(() => ({}));
-          if (res.ok) {
-            delivered = true;
-            contactFeedback.textContent = t('formOk');
-            contactFeedback.classList.add('success');
-            contactForm.reset();
-          }
-        } catch {
-          delivered = false;
+          const { res, data } = await postJson(`${apiBase()}/api/leads`, payload);
+          if (res.ok && data.emailSent) mailed = true;
+        } catch { /* Node puede no estar en el hosting */ }
+
+        if (!mailed) {
+          try { await sendViaPhp(payload); mailed = true; } catch { /* PHP mail */ }
         }
 
-        if (!delivered) {
-          await sendViaFormSubmit(payload);
-          contactFeedback.textContent = t('formOkMail');
-          contactFeedback.classList.add('success');
-          contactForm.reset();
+        if (!mailed) {
+          try { await sendViaFormSubmit(payload); mailed = true; } catch { /* FormSubmit */ }
         }
+
+        if (!mailed) {
+          throw new Error('no_mail_channel');
+        }
+
+        contactFeedback.textContent = t('formOk');
+        contactFeedback.classList.add('success');
+        contactForm.reset();
       } catch {
         contactFeedback.innerHTML = t('formFail') + ' <a href="mailto:contacto@theweb.cl" style="color:#ffde59">contacto@theweb.cl</a>.';
         contactFeedback.classList.add('error');

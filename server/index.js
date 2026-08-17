@@ -5,6 +5,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 
+const { sendLeadNotification, CONTACT_TO } = require('./lib/mail');
 const authRoutes = require('./routes/auth');
 const leadsRoutes = require('./routes/leads');
 const contactsRoutes = require('./routes/contacts');
@@ -50,6 +51,36 @@ app.use('/api/webhooks', webhooksRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/projects/:id/activities', projectActivitiesRoutes);
 app.use('/api/projects', projectsRoutes);
+
+app.post('/send-lead.php', publicLimiter, async (req, res) => {
+  if (req.body && req.body.website) {
+    return res.json({ ok: true });
+  }
+
+  const { name, email, phone, company, message, pageUrl } = req.body || {};
+  if (!name || !message) {
+    return res.status(400).json({ ok: false, error: 'Nombre y mensaje son obligatorios' });
+  }
+  if (!email && !phone) {
+    return res.status(400).json({ ok: false, error: 'Indica email o teléfono' });
+  }
+
+  const mail = await sendLeadNotification({
+    name: String(name).trim(),
+    email: email ? String(email).trim() : null,
+    phone: phone ? String(phone).trim() : null,
+    company: company ? String(company).trim() : null,
+    message: String(message).trim(),
+    source: 'web',
+    pageUrl,
+  });
+
+  if (!mail.sent) {
+    return res.status(502).json({ ok: false, error: mail.reason || 'No se pudo enviar el correo' });
+  }
+
+  res.json({ ok: true, emailedTo: CONTACT_TO, via: mail.via });
+});
 
 app.use('/estudio', express.static(adminDir, { index: 'index.html' }));
 app.get(['/estudio', '/estudio/'], (_req, res) => {

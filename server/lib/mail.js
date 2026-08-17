@@ -42,16 +42,19 @@ function buildLeadEmail({ name, email, phone, company, message, source, pageUrl 
 }
 
 async function sendViaSmtp({ to, replyTo, subject, text, html }) {
-  const host = process.env.SMTP_HOST;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  if (!host || !user || !pass) return { sent: false, reason: 'smtp_not_configured' };
+  if (!user || !pass) return { sent: false, reason: 'smtp_not_configured' };
+
+  const host = process.env.SMTP_HOST || 'smtp.hostinger.com';
+  const port = parseInt(process.env.SMTP_PORT || '465', 10);
+  const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === 'true' : port === 465;
 
   const nodemailer = require('nodemailer');
   const transporter = nodemailer.createTransport({
     host,
-    port: parseInt(process.env.SMTP_PORT || '587', 10),
-    secure: process.env.SMTP_SECURE === 'true',
+    port,
+    secure,
     auth: { user, pass },
   });
 
@@ -67,28 +70,43 @@ async function sendViaSmtp({ to, replyTo, subject, text, html }) {
   return { sent: true, via: 'smtp' };
 }
 
-async function sendViaFormSubmit({ name, email, phone, company, message, source, pageUrl }) {
+function formSubmitOk(payload) {
+  if (!payload || typeof payload !== 'object') return false;
+  const flag = payload.success;
+  return flag === true || flag === 'true';
+}
+
+async function sendViaFormSubmit(lead) {
   const to = CONTACT_TO;
   const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Origin: 'https://theweb.cl',
+      Referer: 'https://theweb.cl/',
+    },
     body: JSON.stringify({
-      name,
-      email: email || 'sin-email@theweb.cl',
-      phone: phone || '',
-      company: company || '',
-      message,
-      source: source || 'web',
-      pageUrl: pageUrl || '',
-      _subject: `[TheWeb] Nuevo lead — ${name}`,
+      name: lead.name,
+      email: lead.email || 'noreply@theweb.cl',
+      phone: lead.phone || '',
+      company: lead.company || '',
+      message: lead.message,
+      source: lead.source || 'web',
+      pageUrl: lead.pageUrl || '',
+      _subject: `[TheWeb] Nuevo lead — ${lead.name}`,
       _template: 'table',
       _captcha: 'false',
     }),
   });
 
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`FormSubmit ${res.status}: ${body.slice(0, 200)}`);
+  const bodyText = await res.text();
+  let json = null;
+  try { json = JSON.parse(bodyText); } catch { /* HTML u otro */ }
+
+  if (!res.ok || !formSubmitOk(json)) {
+    const detail = (json && json.message) || bodyText.slice(0, 180);
+    throw new Error(detail || `FormSubmit HTTP ${res.status}`);
   }
 
   return { sent: true, via: 'formsubmit' };
@@ -97,6 +115,7 @@ async function sendViaFormSubmit({ name, email, phone, company, message, source,
 async function sendLeadNotification(lead) {
   const payload = buildLeadEmail(lead);
   const to = CONTACT_TO;
+  const errors = [];
 
   try {
     const smtp = await sendViaSmtp({
@@ -105,15 +124,18 @@ async function sendLeadNotification(lead) {
       ...payload,
     });
     if (smtp.sent) return smtp;
+    if (smtp.reason) errors.push(smtp.reason);
   } catch (err) {
     console.error('SMTP falló:', err.message);
+    errors.push(err.message);
   }
 
   try {
     return await sendViaFormSubmit(lead);
   } catch (err) {
-    console.error('Envío de correo falló:', err.message);
-    return { sent: false, reason: err.message };
+    console.error('FormSubmit falló:', err.message);
+    errors.push(err.message);
+    return { sent: false, reason: errors.join(' | ') };
   }
 }
 

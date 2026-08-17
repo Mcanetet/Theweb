@@ -41,12 +41,19 @@ router.post('/', async (req, res) => {
       pageUrl,
     });
 
+    if (!mail.sent) {
+      console.error('Lead guardado pero el correo NO salió:', mail.reason);
+    }
+
     res.status(201).json({
       ok: true,
-      message: 'Mensaje enviado. Te contactaremos pronto a través de TheWeb.',
+      message: mail.sent
+        ? 'Mensaje enviado. Te contactaremos pronto a través de TheWeb.'
+        : 'Recibimos tu mensaje. Si no llega el correo, se reintentará por otro canal.',
       leadId: saved.leadId,
       emailedTo: CONTACT_TO,
       emailSent: Boolean(mail.sent),
+      emailError: mail.sent ? undefined : mail.reason,
     });
   } catch (err) {
     console.error('Error al guardar lead:', err);
